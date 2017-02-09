@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -201,7 +200,32 @@
       $(selector).chosen(config[selector]);
     }
 
-   
+		$("#submit").on("click", function(event){
+			event.preventDefault();
+		
+			// This creates a new object with the data that was pulled from the fields. 
+			var newSurveyResponse = {
+				name: $("#name").val().trim(),
+				photo: $("#name").val().trim(),
+				q1: $("#name").val().trim(),
+				q2: $("#name").val().trim(),
+				q3: $("#name").val().trim(),
+				q4: $("#name").val().trim(),
+				q5: $("#name").val().trim(),
+				q6: $("#name").val().trim(),
+				q7: $("#name").val().trim(),
+				q8: $("#name").val().trim(),
+				q9: $("#name").val().trim(),
+				q10: $("#name").val().trim()
+			};
+
+			$.post("http://localhost:3000/api/survey", newsurveyResponse)
+				.done(function(data){
+					console.log(data);
+					alert("Adding Survey...");
+				});
+			return false;
+		});
 
 
   </script>

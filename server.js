@@ -31,7 +31,7 @@ var surveyResponses = [{
         "2"
     ]
 
-}]
+}];
 // Here, we are creating a get request for the page so that the home page is loaded on localhost:3000/
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "/app/public/home.html"));
@@ -40,6 +40,19 @@ app.get("/", function(req, res) {
 app.get("/survey", function (req, res){
     res.sendFile(path.join(__dirname, "app/public/survey.html"));
 });
+
+app.get("/api/friends", function(req, res){
+    res.json(surveyResponses);
+});
+
+app.post("/survey", function (req, res){
+    var newSurveyResponse = req.body;
+    newSurveyResponse.name = newSurveyResponse.name.toLowerCase();
+    console.log(newSurveyResponse);
+    surveyResponses.push(newSurveyResponse);
+    res.json(newSurveyResponse);
+});
+
 // Here, we are creating a listening method so that the express server is listening on the PORT variable, which is 3000
 app.listen(PORT, function(){
     console.log("App listening on PORT " + PORT);
