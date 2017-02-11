@@ -1,12 +1,14 @@
 
 // Creating our variables to incorporate the express, body-parser, and path node packages. 
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+var express = require("express");
+var bodyParser = require("body-parser");
+var path = require("path");
+var htmlRoutes = require("./app/routing/htmlRoutes.js")
+var apiRoutes = require("./app/routing/apiRoutes.js")
 
 // Here, we are going to set up the express app. 
-const app = express();
-const PORT = process.env.PORT || 3000;
+var app = express();
+var PORT = process.env.PORT || 3000;
 
 // Here, we are going to set up the Express App to handle data parsing. 
 app.use(bodyParser.json());
@@ -32,27 +34,12 @@ var surveyResponses = [{
     ]
 
 }];
-// Here, we are creating a get request for the page so that the home page is loaded on localhost:3000/
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "/app/public/home.html"));
-});
-// Here, we are creating a get request for the survey page so that the survey page is loaded on localhost:3000/survey
-app.get("/survey", function (req, res){
-    res.sendFile(path.join(__dirname, "app/public/survey.html"));
-});
 
-app.get("/api/friends", function(req, res){
-    res.json(surveyResponses);
-});
 
-app.post("/survey", function (req, res){
-    var newSurveyResponse = req.body;
-    newSurveyResponse.name = newSurveyResponse.name.toLowerCase();
-    console.log(newSurveyResponse);
-    surveyResponses.push(newSurveyResponse);
-    res.json(newSurveyResponse);
-});
-
+app.use("/", htmlRoutes.home);
+app.use("/", htmlRoutes.survey);
+app.use("/", apiRoutes.posting);
+app.use("/", apiRoutes.route)
 // Here, we are creating a listening method so that the express server is listening on the PORT variable, which is 3000
 app.listen(PORT, function(){
     console.log("App listening on PORT " + PORT);
