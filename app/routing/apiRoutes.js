@@ -1,3 +1,4 @@
+'use strict';
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
@@ -19,16 +20,17 @@ exports.posting = app.post("/api/friends", function (req, res){
     // Now, we are going to loop through the first survey taker's score to set the benchmark for a low score.
     for (var j = 0; j < data.surveyResponses[0].score.length; j++){
 
-        console.log(difference);
-        console.log(bestMatch);
+        console.log("Difference: " + difference);
+        console.log("BestMatch: " + bestMatch);
+        
         // Here, we are going to call the variable difference, and set the difference to the past difference total plus the new difference.We are also going to use the abs method to make the value an absolute value to get a correct value.
-        difference += Math.abs(newSurveyResponse.score[j] - data.surveyResponses[0].score[j]);
+        difference += Math.abs(parseInt(newSurveyResponse.score[j] - data.surveyResponses[0].score[j]));
     }
 
     // Now, we are going to loop through the rest of the survey responses to see if any of them have a lower score. If they have a better score, they are a better match.
-    for(var i = 1; i < data.surveyResponses[i].length; i++){
+    for(var i = 1; i < data.surveyResponses.length; i++){
         var sum = 0;
-        console.log(bestMatch);
+        console.log("Best Match: " + bestMatch);
         for (var j = 0; j < data.surveyResponses[i].score.length; j++){
             sum += Math.abs(parseInt(newSurveyResponse.score[j]) - data.surveyResponses[i].score[j]);
             console.log("Sum: " + sum);
@@ -47,6 +49,8 @@ exports.posting = app.post("/api/friends", function (req, res){
     data.surveyResponses.push(newSurveyResponse);
 
     console.log(data.surveyResponses[bestMatch])
+
+    res.send(data.surveyResponses[bestMatch]);
     
 
 });
