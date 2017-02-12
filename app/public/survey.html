@@ -206,20 +206,25 @@
 			event.preventDefault();
 		
 			// This creates a new object with the data that was pulled from the fields. 
+			var newSurveyArray = [
+				parseInt($("#q1").val().trim()),
+				parseInt($("#q2").val().trim()),
+				parseInt($("#q3").val().trim()),
+				parseInt($("#q4").val().trim()),
+				parseInt($("#q5").val().trim()),
+				parseInt($("#q6").val().trim()),
+				parseInt($("#q7").val().trim()),
+				parseInt($("#q8").val().trim()),
+				parseInt($("#q9").val().trim()),
+				parseInt($("#q10").val().trim())
+				];
+			
+			
+			
 			var newSurveyResponse = {
 				name: $("#name").val().trim(),
 				photo: $("#photo").val().trim(),
-				score: [$("#q1").val().trim(),
-				$("#q2").val().trim(),
-				$("#q3").val().trim(),
-				$("#q4").val().trim(),
-				$("#q5").val().trim(),
-				$("#q6").val().trim(),
-				$("#q7").val().trim(),
-				$("#q8").val().trim(),
-				$("#q9").val().trim(),
-				$("#q10").val().trim()
-				]
+				score: newSurveyArray
 			};
 
 			$.post("/api/friends", newSurveyResponse, function(data){

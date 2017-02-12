@@ -17,23 +17,6 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json"}));
 
 // Here, we are going to save some data in an object. We are creating an array of objects, with the numerical data being saved as an arra of strings inside the instantiated object.
-var surveyResponses = [{
-    "name": "Dylan",
-    "photoURL": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQBS_vTwOeBZaUsZ3pPDpNmVREXJZGvCDvHDwZn4E0s1E83SKnsbQ",
-    "scores": [
-        "5", 
-        "3", 
-        "2", 
-        "4", 
-        "5", 
-        "4",
-        "3",
-        "1", 
-        "4", 
-        "2"
-    ]
-
-}];
 
 
 app.use("/", htmlRoutes.home);
