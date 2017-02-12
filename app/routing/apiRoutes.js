@@ -1,17 +1,19 @@
+// Using strict to make sure our code is good. 
 'use strict';
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
 var data = require('../data/friends.js');
 
+// This allows us to view a JSON object of all responses when visiting that link as a get request.
 exports.route = app.get("/api/friends", function(req, res){
     res.json(data.surveyResponses);
 });
 
+// This allows us to post to that object when a post route is called. 
 exports.posting = app.post("/api/friends", function (req, res){
     var newSurveyResponse = req.body;
     console.log(newSurveyResponse);
-
 
     //Here, we are going to create the loops that compare the new survey taker to the survey takers in the database. 
     var difference = 0;
@@ -43,15 +45,10 @@ exports.posting = app.post("/api/friends", function (req, res){
         }
     }
 
-
-
     // We waited to add the newSurveyResponse to the object, because if it was added at the beginning, it would have found itself as a perfect match. 
     data.surveyResponses.push(newSurveyResponse);
-
     console.log(data.surveyResponses[bestMatch])
-
     res.send(data.surveyResponses[bestMatch]);
-    
 
 });
 

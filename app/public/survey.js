@@ -1,3 +1,4 @@
+// Validation file
 $(document).ready(function(){
     $(document).on('click', '#submit', function(){
         // Here, we are going to make sure they select all the fields. 
@@ -32,20 +33,20 @@ $(document).ready(function(){
 				parseInt($("#q9").val().trim()),
 				parseInt($("#q10").val().trim())
 				];
-			
+			// This creates the newSurveyResponse object with the array above. 
 			var newSurveyResponse = {
 				name: $("#name").val().trim(),
 				photo: $("#photo").val().trim(),
 				score: newSurveyArray
 			};
-
-
+ 
             $.post(window.location.origin + "/api/friends", newSurveyResponse).done(function(bestMatch){
                 $('#matchName').text(bestMatch.name);
-				$('#matchImg').attr("src", bestMatch.picture);
+				$('#matchImg').attr("src", bestMatch.photo);
 				$('#resultsModal').modal('toggle');
             });
         }
+        // If the questions are not all answered, it will trigger the error modal. 
         else{
             $("#errorModal").modal('toggle');
         }
