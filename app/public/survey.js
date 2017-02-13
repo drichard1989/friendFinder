@@ -13,7 +13,7 @@ $(document).ready(function(){
 
             $('.chosen-select').each(function(){
                 if($(this).val() === ""){
-                    isValid = false
+                    isValid = false;
                 }
             });
             return isValid;

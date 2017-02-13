@@ -3,8 +3,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
-var htmlRoutes = require("./app/routing/htmlRoutes.js")
-var apiRoutes = require("./app/routing/apiRoutes.js")
+var htmlRoutes = require("./app/routing/htmlRoutes.js");
+var apiRoutes = require("./app/routing/apiRoutes.js");
 
 // Here, we are going to set up the express app. 
 var app = express();
@@ -25,7 +25,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json"}));
 app.use("/", htmlRoutes.home);
 app.use("/", htmlRoutes.survey);
 app.use("/", apiRoutes.posting);
-app.use("/", apiRoutes.route)
+app.use("/", apiRoutes.route);
 
 // Here, we are creating a listening method so that the express server is listening on the PORT variable, which is 3000
 app.listen(PORT, function(){
